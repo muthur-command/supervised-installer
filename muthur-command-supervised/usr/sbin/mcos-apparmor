@@ -2,10 +2,10 @@
 set -e
 
 # Load configs
-CONFIG_FILE=%%HASSIO_CONFIG%%
+CONFIG_FILE=%%MCOS_SUPERVISOR_CONFIG%%
 
 # Read configs
-DATA="$(jq --raw-output '.data // "/var/lib/homeassistant"' ${CONFIG_FILE})"
+DATA="$(jq --raw-output '.data // "/var/lib/muthurcommand"' ${CONFIG_FILE})"
 PROFILES_DIR="${DATA}/apparmor"
 CACHE_DIR="${PROFILES_DIR}/cache"
 

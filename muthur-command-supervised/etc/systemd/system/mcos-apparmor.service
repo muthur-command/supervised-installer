@@ -1,0 +1,12 @@
+[Unit]
+Description=Muthur Command AppArmor
+Wants=mcos-supervisor.service
+Before=%%SERVICE_DOCKER%% mcos-supervisor.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=%%MCOS_APPARMOR_BINARY%%
+
+[Install]
+WantedBy=multi-user.target

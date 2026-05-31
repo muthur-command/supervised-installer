@@ -7,22 +7,22 @@ function error { echo -e "\e[31m[error] $*\e[39m"; exit 1; }
 
 # Undo diversions
 function undo_divert () {
-  dpkg-divert --package homeassistant-supervised --remove --rename \
+  dpkg-divert --package muthur-command-supervised --remove --rename \
     --divert /etc/NetworkManager/NetworkManager.conf.real /etc/NetworkManager/NetworkManager.conf
 
-  dpkg-divert --package homeassistant-supervised --remove --rename \
+  dpkg-divert --package muthur-command-supervised --remove --rename \
     --divert /etc/NetworkManager/system-connections/default.real /etc/NetworkManager/system-connections/default
 
-  dpkg-divert --package homeassistant-supervised --remove --rename \
+  dpkg-divert --package muthur-command-supervised --remove --rename \
     --divert /etc/docker/daemon.json.real /etc/docker/daemon.json
 
-  dpkg-divert --package homeassistant-supervised --remove --rename \
+  dpkg-divert --package muthur-command-supervised --remove --rename \
     --divert /etc/network/interfaces.real /etc/network/interfaces
 }
 
 function reset_debconf_selections () {
   info "Resetting debconf selections"
-  echo PURGE | debconf-communicate homeassistant-supervised >/dev/null
+  echo PURGE | debconf-communicate muthur-command-supervised >/dev/null
 }
 
 case "$1" in

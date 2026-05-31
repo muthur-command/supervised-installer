@@ -1,0 +1,20 @@
+[Unit]
+Description=Muthur Command supervisor
+Requires=docker.service dbus.service
+Wants=network-online.target mcos-apparmor.service time-sync.target systemd-journal-gatewayd.socket systemd-resolved.service
+After=docker.service dbus.service network-online.target mcos-apparmor.service time-sync.target systemd-journal-gatewayd.socket systemd-resolved.service
+StartLimitIntervalSec=60
+StartLimitBurst=5
+ConditionPathExists=/run/dbus/system_bus_socket
+ConditionPathExists=/run/docker.sock
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5s
+ExecStartPre=-%%BINARY_DOCKER%% stop mcos_supervisor
+ExecStart=%%BINARY_MCOS_SUPERVISOR%%
+ExecStop=-%%BINARY_DOCKER%% stop mcos_supervisor
+
+[Install]
+WantedBy=multi-user.target

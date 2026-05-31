@@ -6,8 +6,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        If you haven't already, please visit the Home Assistant [Discord](https://www.home-assistant.io/join-chat/) and/or [Community Forums](https://community.home-assistant.io/) to get help before filing a bug report.
-        Thank You for taking the time to fill out this bug report!
+        Thank you for taking the time to fill out this bug report!
+        Please include as much detail as possible about your Debian Supervised installation.
   - type: input
     id: os-version
     attributes:
@@ -21,7 +21,7 @@ body:
     attributes:
       label: System Information
       description: Please insert the output of `uname -a`
-      placeholder: 'Linux ha 6.1.0-26-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.112-1 (2024-09-30) x86_64 GNU/Linux'
+      placeholder: 'Linux mcos 6.1.0-26-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.112-1 (2024-09-30) x86_64 GNU/Linux'
     validations:
       required: true
   - type: textarea
@@ -32,9 +32,9 @@ body:
       placeholder: |
         I encountered an issue when trying to upgrade my existing installation to the Debian package.
         Steps to recreate:
-        1. Run the now deprecated installation script
-        2. Attempt to upgrade to version 1.0.0 of the Debian package with dpkg -i as root
-        3. The install will fail with the error: `dpkg-divert: error: rename involves overwriting`
+        1. Install muthur-command-supervised on Debian 13
+        2. Attempt to upgrade with dpkg -i as root
+        3. The install fails with the error: ...
     validations:
       required: true
   - type: dropdown
@@ -68,20 +68,10 @@ body:
       description: Please copy and paste any relevant log output from `journalctl -f`. This will be automatically formatted into code, so no need for backticks.
       render: shell
   - type: checkboxes
-    id: adr
-    attributes:
-      label: ADR
-      description: Before submitting this issue, you have read the [ADR](https://github.com/home-assistant/architecture/blob/master/adr/0014-home-assistant-supervised.md).
-      options:
-        - label: I have read through the [ADR](https://github.com/home-assistant/architecture/blob/master/adr/0014-home-assistant-supervised.md) and have confirmed that my system is compliant with the requirements
-          required: true
-        - label: I understand that if my system is found to not be compliant, my issue will be closed immediately without further investigation
-          required: true
-  - type: checkboxes
     id: terms
     attributes:
       label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://www.home-assistant.io/code_of_conduct/).
+      description: By submitting this issue, you agree to follow our contribution guidelines.
       options:
-        - label: I have read and agree to the [Home Assistant Code of Conduct](https://www.home-assistant.io/code_of_conduct/)
+        - label: I have reproduced this issue on a freshly installed, fully updated Debian 13 with no additional packages beyond the installation steps in README
           required: true

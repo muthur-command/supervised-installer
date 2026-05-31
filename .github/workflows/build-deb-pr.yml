@@ -3,7 +3,7 @@ name: Build Test Deb Package
 on:
   pull_request:
     branches:
-      - main
+      - mc
 jobs:
   build-test-deb-package:
     runs-on: ubuntu-latest
@@ -14,10 +14,10 @@ jobs:
         run: |
           docker run --rm -v $(pwd):/tmp debian:bookworm-slim bash -c \
           "cd /tmp \
-          && chmod 555 homeassistant-supervised/DEBIAN/p* \
-          && dpkg-deb --build --root-owner-group homeassistant-supervised"
+          && chmod 555 muthur-command-supervised/DEBIAN/p* \
+          && dpkg-deb --build --root-owner-group muthur-command-supervised"
       - name: Upload
         uses: actions/upload-artifact@v7
         with:
-          name: homeassistant-supervised.deb
-          path: homeassistant-supervised.deb
+          name: muthur-command-supervised.deb
+          path: muthur-command-supervised.deb

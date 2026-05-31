@@ -1,22 +1,16 @@
-> [!WARNING]
-> This installation method is unsupported with the Home Assistant OS 2025.12.0
-> release. See the [Deprecating Core and Supervised installation methods, and 32-bit systems](https://www.home-assistant.io/blog/2025/05/22/deprecating-core-and-supervised-installation-methods-and-32-bit-systems/)
-> blog post for more information.
-
-
 > [!IMPORTANT]
 > This installation method is for advanced users only!
 >
 > The Supervised Debian installation is an opinionated appliance. That means it has
 > many dependencies and bundles default configuration files for system services!
 >
-> Make sure you understand [the requirements](https://github.com/home-assistant/architecture/blob/master/adr/0014-home-assistant-supervised.md).
+> For typical users, please use the official Muthur Command OS image (OVA / Raspberry Pi).
 
-# Install Home Assistant Supervised
+# Install Muthur Command Supervised
 
-This installation method provides the full Home Assistant experience on a regular operating system. This means, all components from the Home Assistant method are used, except for the Home Assistant Operating System. This system will run the Home Assistant Supervisor. The Supervisor is not just an application, it is a full appliance that manages the whole system. It will clean up, repair or reset settings to default if they no longer match expected values.
+This installation method provides the full Muthur Command experience on a regular operating system. This means, all components from the Muthur Command method are used, except for the Muthur Command Operating System. This system will run the Muthur Command Supervisor. The Supervisor is not just an application, it is a full appliance that manages the whole system. It will clean up, repair or reset settings to default if they no longer match expected values.
 
-By not using the Home Assistant Operating System, the user is responsible for making sure that all required components are installed and maintained. Required components and their versions will change over time. Home Assistant Supervised is provided as-is as a foundation for community supported do-it-yourself solutions. We only accept bug reports for issues that have been reproduced on a freshly installed, fully updated Debian with no additional packages.
+By not using the Muthur Command Operating System, the user is responsible for making sure that all required components are installed and maintained. Required components and their versions will change over time. Muthur Command Supervised is provided as-is as a foundation for community supported do-it-yourself solutions. We only accept bug reports for issues that have been reproduced on a freshly installed, fully updated Debian with no additional packages.
 
 This method is considered advanced and should only be used if one is an expert in managing a Linux operating system, Docker and networking.
 
@@ -71,13 +65,13 @@ curl -fsSL get.docker.com | sh
 
 Step 4: Install the OS-Agent:
 
-Instructions for installing the OS-Agent can be found [here](https://github.com/home-assistant/os-agent/tree/main#using-home-assistant-supervised-on-debian)
+Instructions for installing the OS-Agent can be found [here](https://github.com/muthur-command/os-agent/tree/mc#install--upgrade)
 
-Step 5: Install the Home Assistant Supervised Debian Package:
+Step 5: Install the Muthur Command Supervised Debian Package:
 
 ```bash
-curl -L -o homeassistant-supervised.deb https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb
-apt install ./homeassistant-supervised.deb
+curl -L -o muthur-command-supervised.deb https://github.com/muthur-command/supervised-installer/releases/latest/download/muthur-command-supervised.deb
+apt install ./muthur-command-supervised.deb
 ```
 
 ## Supported Machine types
@@ -95,17 +89,21 @@ apt install ./homeassistant-supervised.deb
 
 ## Configuration
 
-The default path for our `$DATA_SHARE` is `/var/lib/homeassistant` (used to be `/usr/share/hassio`).
-This path is used to store all home assistant related things.
+The default path for our `$DATA_SHARE` is `/var/lib/muthurcommand`.
+This path is used to store all Muthur Command related things.
 
 You can reconfigure this path during installation with
 
 ```bash
-DATA_SHARE=/my/own/homeassistant dpkg --force-confdef --force-confold -i homeassistant-supervised.deb
+DATA_SHARE=/my/own/muthurcommand dpkg --force-confdef --force-confold -i muthur-command-supervised.deb
 ```
 
 ## Troubleshooting
 
-If something's going wrong, use `journalctl -f` to get your system logs. If you are not familiar with Linux and how you can fix issues, we recommend to use our Home Assistant OS.
+If something's going wrong, use `journalctl -f` to get your system logs. If you are not familiar with Linux and how you can fix issues, we recommend to use Muthur Command OS.
 
-[![Home Assistant - A project from the Open Home Foundation](https://www.openhomefoundation.org/badges/home-assistant.png)](https://www.openhomefoundation.org/)
+## Source
+
+- **Upstream:** [home-assistant/supervised-installer](https://github.com/home-assistant/supervised-installer) — upstream source repository (ported to Muthur Command OS).
+- **This repository:** **Muthur Command** maintains this fork for **Muthur Command OS**; behavior may diverge from upstream over time.
+- **License:** Apache-2.0; see [`LICENSE`](./LICENSE).

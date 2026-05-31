@@ -6,7 +6,7 @@ function error { echo -e "\e[31m[error] $*\e[39m"; exit 1; }
 
 warn ""
 warn "If you want more control over your own system, run"
-warn "Home Assistant as a VM or run Home Assistant Core"
+warn "Muthur Command as a VM or run Muthur Command Core"
 warn "via a Docker container."
 warn ""
 
@@ -54,36 +54,35 @@ if [[ "$(sysctl --values kernel.dmesg_restrict)" != "0" ]]; then
     echo "kernel.dmesg_restrict=0" >> /etc/sysctl.conf
 fi
 
-# If the hassio_supervisor service is running or exists, stop it 
-if [[ "$(systemctl is-active hassio-supervisor.service)" == "active" ]]; then
-    info "Stopping hassio_supervisor service"
-    systemctl stop hassio-supervisor.service
+# If the mcos_supervisor service is running, stop it
+if [[ "$(systemctl is-active mcos-supervisor.service)" == "active" ]]; then
+    info "Stopping mcos-supervisor service"
+    systemctl stop mcos-supervisor.service
 fi
 
-# If the hassio_apparmor service is running or exists, stop it
-if [[ "$(systemctl is-active hassio-apparmor.service)" == "active" ]]; then
-    info "Stopping hassio_apparmor service"
-    systemctl stop hassio-apparmor.service
+# If the mcos-apparmor service is running, stop it
+if [[ "$(systemctl is-active mcos-apparmor.service)" == "active" ]]; then
+    info "Stopping mcos-apparmor service"
+    systemctl stop mcos-apparmor.service
 fi
 
-# Check for existing hassio_supervisor container and destroy it
-if [[ "$(docker ps -aq -f name=hassio_supervisor)" ]]; then
-    # ensure the hassio_supervisor service is stopped
-    info "Removing existing hassio_supervisor container"
-    docker container rm --force hassio_supervisor > /dev/null
+# Check for existing mcos_supervisor container and destroy it
+if [[ "$(docker ps -aq -f name=mcos_supervisor)" ]]; then
+    info "Removing existing mcos_supervisor container"
+    docker container rm --force mcos_supervisor > /dev/null
 fi
 
-dpkg-divert --package homeassistant-supervised --add --rename \
+dpkg-divert --package muthur-command-supervised --add --rename \
     --divert /etc/NetworkManager/NetworkManager.conf.real /etc/NetworkManager/NetworkManager.conf
 
-dpkg-divert --package homeassistant-supervised --add --rename \
+dpkg-divert --package muthur-command-supervised --add --rename \
     --divert /etc/NetworkManager/system-connections/default.real /etc/NetworkManager/system-connections/default
 
-dpkg-divert --package homeassistant-supervised --add --rename \
+dpkg-divert --package muthur-command-supervised --add --rename \
     --divert /etc/docker/daemon.json.real /etc/docker/daemon.json
 
-dpkg-divert --package homeassistant-supervised --add --rename \
+dpkg-divert --package muthur-command-supervised --add --rename \
     --divert /etc/network/interfaces.real /etc/network/interfaces
 
-dpkg-divert --package homeassistant-supervised --add --rename \
+dpkg-divert --package muthur-command-supervised --add --rename \
     --divert /etc/systemd/resolved.conf.real /etc/systemd/resolved.conf
